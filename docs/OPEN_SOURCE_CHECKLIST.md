@@ -11,17 +11,20 @@
 - MIT、贡献指南、安全政策、Issue / PR 模板及依赖许可声明继续保留。
 - CI 顺序为安装、依赖审计、构建、测试，避免干净克隆缺少构建文件。
 
-## 发布前仍需核对
+## 发布状态
 
-- [ ] 登录 GitHub 确认 CI 结果，并检查 Issues、PR、Actions 日志、Artifacts、Releases 和附件。浏览器连接失败，不能视为已检查。
-- [ ] 检查 GitHub 的旧提交缓存。重写主分支不能保证缓存、其他人的克隆或 Fork 立即删除；不要把一次强制推送描述为平台彻底擦除。
-- [ ] 启用私密漏洞报告，并确认所需的仓库安全设置。
-- [ ] 确认后再切换 Public。本轮只整理和同步源码，没有修改仓库可见性。
+- [x] 仓库已设为 Public，匿名 GitHub API 可以读取仓库，识别协议为 MIT。
+- [x] 公开时 main 的 GitHub Actions 检查通过；没有 Artifacts、Releases、PR 或开放 Issues。Actions 中保留了一次较早的失败运行记录。
+- [x] 整理后的最新网站已发布到 [线上站点](https://jasper-wei.vast-beech-4429.chatgpt.site/)。
+- [x] 修正 Sites 路由回退：读取根路径的应用页面，避免 `/index.html` 的规范化重定向把详情链接带回首页。
+- [ ] GitHub 私密漏洞报告尚未核实启用；现有 SECURITY.md 提供邮件报告渠道。
+
+重写主分支不能保证 GitHub 旧提交缓存、其他人的克隆或 Fork 立即删除；本记录不代表平台彻底擦除。
 
 ## 检查范围
 
 整理前 Git 远端只公布 main，无标签或公布的 PR 引用。原作者明确接受当前个人照片与联系方式继续展示；它们不属于本轮待删除内容。
 
-本轮不删除电脑上的原始资料或设计参考目录，也不重新部署网站。线上站点不会因源码整理自动更新，托管商旧版本不在本轮 Git 清理范围内。
+本轮不删除电脑上的原始资料或设计参考目录。网站已单独部署；后续推送 GitHub 不会自动部署。托管商旧版本不在本轮 Git 清理范围内。
 
 参考：[GitHub 历史清理的边界](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)。

@@ -8,7 +8,8 @@ export default {
     }
 
     const indexUrl = new URL(request.url);
-    indexUrl.pathname = "/index.html";
+    // Fetch the canonical shell URL: /index.html redirects to / in ASSETS.
+    indexUrl.pathname = "/";
     indexUrl.search = "";
     return env.ASSETS.fetch(new Request(indexUrl, request));
   },

@@ -4,7 +4,7 @@ Jasper Wei 的个人网站，用来介绍自己、展示正在做的项目，并
 
 基于 React、Vite 和原生 CSS 构建，包含 WebGL 波动光场、平滑滚动、响应式页面和减少动态效果支持。
 
-> 当前处于开源准备阶段。代码采用 MIT 协议；图片及个人内容的授权范围见 [素材与第三方声明](THIRD_PARTY_NOTICES.md)。当前版本与发布检查见 [仓库整理记录](docs/OPEN_SOURCE_CHECKLIST.md)。
+> 仓库已公开。在线访问：[Jasper 个人网站](https://jasper-wei.vast-beech-4429.chatgpt.site/)。代码采用 MIT 协议；图片及个人内容的授权范围见 [素材与第三方声明](THIRD_PARTY_NOTICES.md)。当前版本与发布检查见 [仓库整理记录](docs/OPEN_SOURCE_CHECKLIST.md)。
 
 ## 页面与功能
 
@@ -27,7 +27,7 @@ npm ci
 npm run dev -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
-打开 <http://127.0.0.1:4173/>。仓库尚未公开时，克隆需要仓库访问权限。
+打开 <http://127.0.0.1:4173/>。
 
 | 命令 | 用途 |
 | --- | --- |
