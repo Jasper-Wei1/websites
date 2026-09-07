@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+qa/
+design-qa.md
+public/fonts/Anton-Regular.ttf
+
+# Local credentials and private working files
+*.pem
+*.key
+*.p12
+*.pfx
+.envrc
+.wrangler/
+coverage/
+private/
+drafts/

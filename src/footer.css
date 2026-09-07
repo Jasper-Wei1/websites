@@ -1,0 +1,64 @@
+/* Footer-only adaptation of the user-selected Midu screenshot. */
+.footer {
+  --footer-top: clamp(110px, 8vw, 160px);
+  --footer-copy: clamp(215px, 12vw, 250px);
+  padding: var(--footer-top) var(--gutter) 0;
+  border-top: 0;
+  scroll-margin-top: -110px;
+}
+.footer-content {
+  grid-template-columns: minmax(0, 1fr) clamp(150px, 14vw, 270px) clamp(130px, 8vw, 160px);
+  gap: 3vw;
+  min-height: var(--footer-copy);
+}
+.footer-time { color: #d0d0d0; font-variant-numeric: tabular-nums; }
+.footer-invitation h2 {
+  margin: 34px 0 80px;
+}
+.footer-invitation .contact-pill { padding: 14px 18px; }
+.footer-links { padding-top: 0; }
+.footer-links > span:first-child { margin-bottom: 24px; }
+.footer-links > a { line-height: 1.25; min-height: 23px; }
+.footer-links .motion-control, .footer-links .copy-email { margin-top: 12px; }
+.footer-meta { height: 90px; padding: 34px 0 24px; }
+.footer-meta > a { min-height: 32px; }
+.footer-wordmark {
+  display: block;
+  position: relative;
+  bottom: 0;
+  height: max(260px, calc(100svh - var(--footer-top) - var(--footer-copy) - 90px));
+  overflow: hidden;
+}
+.footer-wordmark .wordmark {
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+  font-size: 36vw;
+  line-height: .72;
+  letter-spacing: -.075em;
+  padding: 0;
+  /* This is the editable name's text fill, not an image or wave texture. */
+  background-image: linear-gradient(180deg, #080505 0%, #5f0005 40%, #c90013 75%, #ef4e32 100%);
+  background-color: transparent;
+  background-size: 100% max(260px, calc(100svh - var(--footer-top) - var(--footer-copy) - 90px));
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  filter: none;
+  animation: none;
+}
+@media (max-width: 1050px) and (min-width: 641px) {
+  .footer { min-height: 100svh; display: flex; flex-direction: column; }
+  .footer-content { grid-template-columns: minmax(0, 1fr) 130px 120px; flex: 1; }
+  .footer-invitation h2 { margin-bottom: 64px; }
+  .footer-wordmark { height: 28vw; }
+  .footer-wordmark .wordmark { font-size: 36vw; background-size: 100% 28vw; }
+}
+@media (max-width: 640px) {
+  .footer { padding-top: 95px; }
+  .footer-content { grid-template-columns: 1fr 1fr; gap: 45px 30px; min-height: 0; }
+  .footer-invitation h2 { margin: 28px 0 40px; }
+  .footer-time { }
+  .footer-links > a { min-height: 44px; }
+  .footer-meta { height: auto; padding: 36px 0 24px; }
+  .footer-wordmark { height: 27vw; min-height: 0; }
+  .footer-wordmark .wordmark { font-size: 36vw; background-size: 100% 27vw; }
+}

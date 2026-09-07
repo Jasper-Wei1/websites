@@ -1,0 +1,13 @@
+/* One normal-flow foreground sheet covers a more slowly retreating hero. */
+.hero-scroll { position: relative; isolation: isolate; z-index: 0; }
+.hero { will-change: transform; border-radius: 0; }
+.about { position: relative; z-index: 2; background: #050505; }
+.wave-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; z-index: 0; }
+.wave-ready .wave-canvas { opacity: 1; }
+.wave-ready .hero-light { display: none; }
+.wave-ready .wordmark { background: none; color: transparent; filter: none; }
+/* The retained raster is a static fallback only, never a second moving field. */
+.hero-light, .hero .wordmark { animation: none; }
+html.lenis, html[data-scroll="smooth"] { scroll-behavior: auto !important; }
+html[data-motion="reduced"] .hero { will-change: auto; transform: none !important; }
+@media (prefers-reduced-motion: reduce) { .hero { will-change: auto; transform: none !important; } }
