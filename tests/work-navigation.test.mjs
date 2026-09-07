@@ -7,6 +7,24 @@ const source = path => readFileSync(new URL(path, import.meta.url), 'utf8');
 const work = source('../src/WorkPages.jsx');
 const app = source('../src/App.jsx');
 
+test('footer omits manual motion controls while retaining system reduced motion', () => {
+  assert.doesNotMatch(app, /motion-control|setPaused|暂停动效|播放动效/);
+  assert.match(app, /prefers-reduced-motion: reduce/);
+  assert.match(app, /usePageMotion\(reduced, route\)/);
+  assert.match(app, /<WaveLight paused=\{reduced\}/);
+  assert.match(app, /dataset\.motion = reduced \? 'reduced' : 'full'/);
+});
+
+test('hero identity and shared local clock represent Jasper in Shenzhen', () => {
+  assert.match(app, /hero-meta"><span>Jasper Wei · Personal website<\/span>/);
+  assert.match(app, /const timeAndPlace = \[time, 'Shenzhen, China'\]/);
+  assert.match(app, /className="time-label">\{timeAndPlace\}/);
+  assert.match(app, /className="footer-time">\{timeAndPlace\}/);
+  assert.match(app, /timeZone: 'Asia\/Shanghai'/);
+  assert.doesNotMatch(app, /GMT\+8/);
+  assert.match(app, /about-copy[\s\S]*AI Innovation Consultant/);
+});
+
 test('expanded navigation is text-only and follows the four-section homepage order', () => {
   const menu = app.split('function Menu()')[1].split('export function App()')[0];
   assert.doesNotMatch(menu, /<img|thermal-field|jasper-original/);

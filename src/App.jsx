@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowUpRight, ArrowUp, SquaresFour, StarFour, Pause, Play, Copy, Check } from '@phosphor-icons/react';
+import { ArrowDown, ArrowUpRight, ArrowUp, SquaresFour, StarFour, Copy, Check } from '@phosphor-icons/react';
 import '@fontsource/anton/latin-400.css';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
@@ -74,8 +74,9 @@ export function App() {
   const route = useRoute();
   const isHome = route === '/', isWork = route === workPath, isCase = route === casePath, isArticle = route === articlePath;
   const project = projectCases.find(item => item.path === route);
-  const [paused, setPaused] = useState(false), [reduced, setReduced] = useState(false), [copied, setCopied] = useState(false), [time, setTime] = useState('');
-  usePageMotion(paused || reduced, route);
+  const [reduced, setReduced] = useState(false), [copied, setCopied] = useState(false), [time, setTime] = useState('');
+  const timeAndPlace = [time, 'Shenzhen, China'].filter(Boolean).join(' · ');
+  usePageMotion(reduced, route);
   useEffect(() => {
     document.title = project ? project.name + '  Jasper' : isWork ? '我的项目  Jasper' : isCase ? '直播切片工作流  Jasper' : isArticle ? '把剪切片变成一条生产线  Jasper' : 'Jasper Wei  Always exploring';
   }, [isCase, isArticle, project, isWork]);
@@ -87,7 +88,7 @@ export function App() {
     tick(); const interval = setInterval(tick, 30000);
     return () => { preference.removeEventListener('change', update); clearInterval(interval); };
   }, []);
-  useEffect(() => { document.documentElement.dataset.motion = paused || reduced ? 'reduced' : 'full'; }, [paused, reduced]);
+  useEffect(() => { document.documentElement.dataset.motion = reduced ? 'reduced' : 'full'; }, [reduced]);
   const copyEmail = async () => {
     try { await navigator.clipboard.writeText(email); setCopied(true); setTimeout(() => setCopied(false), 2400); }
     catch { window.location.href = 'mailto:' + email; }
@@ -98,11 +99,11 @@ export function App() {
 <main key={route} id="main-content" tabIndex={-1} className="route-content" data-route={route}>
       {isHome ?<>
 <div className="hero-scroll" id="home"><section className="hero" aria-label="Jasper 的个人主页">
-<div className="hero-meta"><span>AI Innovation Consultant</span><span className="time-label">{time}<span>GMT+8</span></span></div>
+<div className="hero-meta"><span>Jasper Wei · Personal website</span><span className="time-label">{timeAndPlace}</span></div>
 <div className="hero-statement"><p>Stay curious<br />Bring ideas to life</p><span>保持好奇 把想法变成现实</span></div>
 <a href="#about" className="scroll-prompt">Scroll to explore<ArrowDown size={15} /></a>
 <div className="hero-light" aria-hidden="true" /><Wordmark />
-<WaveLight paused={paused || reduced} />
+<WaveLight paused={reduced} />
 </section></div>
 <section id="about" className="about" aria-labelledby="about-title">
 <Reveal><div className="eyebrow"><span>01  ABOUT ME</span><span>30 秒认识我</span></div><h2 id="about-title" className="about-heading"><span>把复杂的事理清</span><span>把 AI 的想法</span><span>变成真实的工具</span></h2></Reveal>
@@ -117,8 +118,8 @@ export function App() {
 </> : isWork ?<WorkIndex Reveal={Reveal} /> : isCase ?<LivestreamCase Reveal={Reveal} /> : project ?<ProjectCase project={project} Reveal={Reveal} /> : isArticle ?<LivestreamArticle Reveal={Reveal} /> :<section className="not-found"><h1>这里还没有内容</h1><a className="contact-pill" href="/">回到首页</a></section>}
 </main>
 <footer id="contact" className="footer">
-<div className="footer-content"><div className="footer-invitation"><span className="footer-time">{time} GMT+8</span><h2>Stay curious<br />Bring ideas to life</h2><a href={'mailto:' + email} className="contact-pill"><StarFour weight="fill" size={16} /><span>Say hello</span></a></div>
-<div className="footer-links"><span>Explore</span><a href="/#home">Home</a><a href="/#about">About me</a><a href={workPath}>Work</a><a href="/#photography">Photography</a><button className="motion-control" onClick={() => setPaused(value => !value)} disabled={reduced} aria-pressed={paused || reduced}>{paused || reduced ?<Play size={14} /> :<Pause size={14} />}{reduced ? '已减少动态' : paused ? '播放动效' : '暂停动效'}</button></div>
+<div className="footer-content"><div className="footer-invitation"><span className="footer-time">{timeAndPlace}</span><h2>Stay curious<br />Bring ideas to life</h2><a href={'mailto:' + email} className="contact-pill"><StarFour weight="fill" size={16} /><span>Say hello</span></a></div>
+<div className="footer-links"><span>Explore</span><a href="/#home">Home</a><a href="/#about">About me</a><a href={workPath}>Work</a><a href="/#photography">Photography</a></div>
 <div className="footer-links"><span>Socials</span>{socials.map(([name, href]) =><ExternalLink key={name} href={href}>{name}</ExternalLink>)}<button className="copy-email" onClick={copyEmail}>{copied ?<Check size={14} /> :<Copy size={14} />}{copied ? '邮箱已复制' : '复制邮箱'}</button><span className="sr-only" role="status">{copied ? '邮箱地址已复制' : ''}</span></div>
 </div>
 <div className="footer-meta"><span>© 2026 JASPER WEI<br />ALWAYS A WORK IN PROGRESS</span><a href={isHome ? '#home' : '#page-top'}>Back to top<ArrowUp size={14} /></a></div>
